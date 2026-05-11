@@ -1,0 +1,13 @@
+{
+    "require": {
+        "sentry/sentry": "^4.24",
+      "ext-imap": "*",
+      "ext-zlib": "*",
+      "ext-mysqli": "*",
+      "ext-simplexml": "*",
+      "ext-zip": "*"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^6.16"
+    }
+}

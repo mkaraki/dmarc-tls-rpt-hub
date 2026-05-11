@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app/public:ro
+    ports:
+      - 8080:80
+  
+  db:
+    image: mariadb:10.6
+    volumes:
+      - ./init.db:/docker-entrypoint-initdb.d:ro
+    environment:
+      MARIADB_ROOT_PASSWORD: dmarc
+      MARIADB_DATABASE: dmarc
