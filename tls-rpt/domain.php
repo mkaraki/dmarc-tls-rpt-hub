@@ -11,7 +11,7 @@ if (empty($_GET['domain'])) {
     die('Domain is required');
 }
 
-$stmt_domain = $db->prepare('SELECT domain_name FROM general_domain WHERE domain_name = ?');
+$stmt_domain = $db->prepare('SELECT id, domain_name FROM general_domain WHERE domain_name = ?');
 $stmt_domain->bind_param('s', $_GET['domain']);
 $stmt_domain->execute();
 $res_domain = $stmt_domain->get_result();
@@ -21,10 +21,12 @@ if ($res_domain === false) {
 if ($res_domain->num_rows === 0) {
     die('Domain not found');
 }
-$res_domain = $res_domain->fetch_column(0);
+$res_domain_row = $res_domain->fetch_assoc();
+$domain_id = $res_domain_row['id'];
+$domain_name = $res_domain_row['domain_name'];
 
 $stmt_policy = $db->prepare('SELECT p.id, p.policy_type, d.domain_name AS policy_domain, p.summary_total_successful_sessions, p.summary_total_failed_sessions FROM tls_rpt_policy p JOIN general_domain d ON p.policy_domain_id = d.id WHERE p.policy_domain_id = ? ORDER BY p.id DESC LIMIT 100 OFFSET ?');
-$stmt_policy->bind_param('ii', $res_domain, $offset);
+$stmt_policy->bind_param('ii', $domain_id, $offset);
 $stmt_policy->execute();
 $res_policy = $stmt_policy->get_result();
 if ($res_policy === false) {
@@ -37,7 +39,7 @@ $res_policy = $res_policy->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TLS RPT for <?= htmlentities($res_domain) ?></title>
+    <title>TLS RPT for <?= htmlentities($domain_name) ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css" integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -45,7 +47,7 @@ $res_policy = $res_policy->fetch_all(MYSQLI_ASSOC);
     <div class="row">
         <div class="col">
             <h1>
-                TLS RPT Policies for <code><?= htmlentities($res_domain) ?></code>
+                TLS RPT Policies for <code><?= htmlentities($domain_name) ?></code>
             </h1>
         </div>
         <hr />
