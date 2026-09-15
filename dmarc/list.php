@@ -151,13 +151,14 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                 <td></td>
                                 <th scope="row"><?= htmlentities($spf_info['domain_name']) ?></th>
                                 <td colspan="5">
-                                    <?php if ($spf_info['spf_result'] === 'fail') : ?>
-                                        <span class="badge text-bg-danger">SPF: Fail</span>
-                                    <?php elseif ($spf_info['spf_result'] === 'pass') : ?>
+                                    <?php switch ($spf_info['spf_result']) :
+                                        case 'pass': ?>
                                         <span class="badge text-bg-success">SPF: Pass</span>
-                                    <?php else : ?>
+                                    <?php case 'fail': ?>
+                                        <span class="badge text-bg-danger">SPF: Fail</span>
+                                    <?php default: ?>
                                         <span class="badge text-bg-warning"><?= htmlentities($spf_info['spf_result']) ?></span>
-                                    <?php endif; ?>
+                                    <?php endswitch; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -175,14 +176,15 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                             <tr>
                                 <td></td>
                                 <th scope="row"><?= htmlentities($dkim_info['domain_name']) ?></th>
-                                <td colspan="5" class="spf-dkim-res-<?= htmlentities($dkim_info['dkim_result']) ?>">
-                                    <?php if ($dkim_info['dkim_result'] === 'fail') : ?>
-                                        <span class="badge text-bg-danger">DKIM: Fail</span>
-                                    <?php elseif ($dkim_info['dkim_result'] === 'pass') : ?>
+                                <td colspan="5">
+                                    <?php switch ($dkim_info['dkim_result']) :
+                                        case 'pass': ?>
                                         <span class="badge text-bg-success">DKIM: Pass</span>
-                                    <?php else : ?>
+                                    <?php case 'fail': ?>
+                                        <span class="badge text-bg-danger">DKIM: Fail</span>
+                                    <?php default: ?>
                                         <span class="badge text-bg-warning"><?= htmlentities($dkim_info['dkim_result']) ?></span>
-                                    <?php endif; ?>
+                                    <?php endswitch; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
