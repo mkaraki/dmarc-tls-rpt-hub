@@ -264,7 +264,7 @@ function dmarc_add(mysqli $db, SimpleXMLElement $rpt): bool {
         if ($res->num_rows > 0) {
             print('Already exists.' . "\n");
             $db->rollback();
-            return false;
+            return defined('PURGE_ALREADY_EXISTS_DMARC') && PURGE_ALREADY_EXISTS_DMARC;
         }
         
         $stmt = $db->prepare('INSERT INTO dmarc_report (metadata_org_id, metadata_report_id, date_range_begin, date_range_end)

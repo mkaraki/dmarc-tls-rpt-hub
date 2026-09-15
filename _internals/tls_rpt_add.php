@@ -389,7 +389,7 @@ function tls_rpt_add(mysqli $db, $rpt): bool {
         if ($res->num_rows > 0) {
             $db->rollback();
             print('Already added.' . "\n");
-            return true;
+            return defined('PURGE_ALREADY_EXISTS_TLS_RPT') && PURGE_ALREADY_EXISTS_TLS_RPT;
         }
         
         // Format: YYYY-mm-ddTHH:ii:ssZ (UTC)

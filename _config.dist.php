@@ -18,3 +18,6 @@ const DMARC_IMAP_PASS = 'password';
 
 const PURGE_AFTER_HARVEST_TLS_RPT = true;
 const PURGE_AFTER_HARVEST_DMARC = true;
+
+const PURGE_ALREADY_EXISTS_TLS_RPT = false;
+const PURGE_ALREADY_EXISTS_DMARC = false;
