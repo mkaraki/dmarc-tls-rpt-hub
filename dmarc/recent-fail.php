@@ -139,7 +139,11 @@ $res_policy = $res_policy->fetch_all(MYSQLI_ASSOC);
                             <?php switch ($policy['result']) :
                                 case 'pass': ?>
                                 <span class="badge text-bg-success"><?= htmlentities($policy['auth_type']) ?>: <?= htmlentities($policy['result']) ?></span>
-                            <?php break; case 'fail': ?>
+                            <?php
+                                break;
+                                case 'fail':
+                                case 'hardfail':
+                            ?>
                                 <span class="badge text-bg-danger"><?= htmlentities($policy['auth_type']) ?>: <?= htmlentities($policy['result']) ?></span>
                             <?php break; default: ?>
                                 <span class="badge text-bg-warning"><?= htmlentities($policy['auth_type']) ?>: <?= htmlentities($policy['result']) ?></span>
