@@ -153,7 +153,7 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                 <td colspan="5">
                                     <?php if ($spf_info['spf_result'] === 'fail') : ?>
                                         <span class="badge text-bg-danger">SPF: Fail</span>
-                                    <?php else if ($spf_info['spf_result'] === 'pass') : ?>
+                                    <?php elseif ($spf_info['spf_result'] === 'pass') : ?>
                                         <span class="badge text-bg-success">SPF: Pass</span>
                                     <?php else : ?>
                                         <span class="badge text-bg-warning"><?= htmlentities($spf_info['spf_result']) ?></span>
@@ -178,7 +178,7 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                 <td colspan="5" class="spf-dkim-res-<?= htmlentities($dkim_info['dkim_result']) ?>">
                                     <?php if ($dkim_info['dkim_result'] === 'fail') : ?>
                                         <span class="badge text-bg-danger">DKIM: Fail</span>
-                                    <?php else if ($dkim_info['dkim_result'] === 'pass') : ?>
+                                    <?php elseif ($dkim_info['dkim_result'] === 'pass') : ?>
                                         <span class="badge text-bg-success">DKIM: Pass</span>
                                     <?php else : ?>
                                         <span class="badge text-bg-warning"><?= htmlentities($dkim_info['dkim_result']) ?></span>
