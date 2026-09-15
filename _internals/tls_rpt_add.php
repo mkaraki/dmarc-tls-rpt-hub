@@ -377,7 +377,7 @@ function tls_rpt_add(mysqli $db, $rpt): bool {
         // Dedup with org_id + report_id.
         
         $stmt = $db->prepare('SELECT id FROM tls_rpt WHERE tls_rpt_report_organization_id = ? AND report_id = ? LIMIT 1');
-        $stmt->bind_param('ii', $org_id, $report_id);
+        $stmt->bind_param('is', $org_id, $report_id);
         $stmt->execute();
         $res = $stmt->get_result();
         if ($res === false) {
