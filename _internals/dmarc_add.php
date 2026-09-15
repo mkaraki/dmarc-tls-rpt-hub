@@ -13,7 +13,7 @@ function dmarc_org_add(mysqli $db, SimpleXMLElement $rpt): int|false {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find org info: ' . $errors);
+        print('Failed to find org info: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -23,7 +23,7 @@ function dmarc_org_add(mysqli $db, SimpleXMLElement $rpt): int|false {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert org info: ' . $errors);
+            print('Failed to insert org info: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -39,7 +39,7 @@ function dmarc_error_add(mysqli $db, $err): int|false {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find error info: ' . $errors);
+        print('Failed to find error info: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -49,7 +49,7 @@ function dmarc_error_add(mysqli $db, $err): int|false {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert error info: ' . $errors);
+            print('Failed to insert error info: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -69,7 +69,7 @@ function dmarc_error_add_and_assign(mysqli $db, $err): bool {
     $res = $stmt->execute();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to assign error info: ' . $errors);
+        print('Failed to assign error info: ' . $errors . "\n");
         return false;
     }
     return true;
@@ -105,7 +105,7 @@ function dmarc_record_add(mysqli $db, int $report_id, SimpleXMLElement $record):
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to insert dmarc_record: ' . $errors);
+        print('Failed to insert dmarc_record: ' . $errors . "\n");
         return false;
     }
     return $res->fetch_column(0);
@@ -124,7 +124,7 @@ function dmarc_spf_result_add(mysqli $db, int $record_id, SimpleXMLElement $spf)
     $res = $stmt->execute();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to insert dmarc_spf_result: ' . $errors);
+        print('Failed to insert dmarc_spf_result: ' . $errors . "\n");
         return false;
     }
     return true;
@@ -137,7 +137,7 @@ function dmarc_dkim_selector_add(mysqli $db, $selector): int|false {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find dkim: ' . $errors);
+        print('Failed to find dkim: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -147,7 +147,7 @@ function dmarc_dkim_selector_add(mysqli $db, $selector): int|false {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert dkim: ' . $errors);
+            print('Failed to insert dkim: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -163,7 +163,7 @@ function dmarc_dkim_human_result_add(mysqli $db, $human_result): int|false {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find dkim human result: ' . $errors);
+        print('Failed to find dkim human result: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -173,7 +173,7 @@ function dmarc_dkim_human_result_add(mysqli $db, $human_result): int|false {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert dkim human result: ' . $errors);
+            print('Failed to insert dkim human result: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -212,7 +212,7 @@ function dmarc_dkim_result_add(mysqli $db, int $record_id, SimpleXMLElement $dki
     $res = $stmt->execute();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to insert dmarc_dkim_result: ' . $errors);
+        print('Failed to insert dmarc_dkim_result: ' . $errors . "\n");
         return false;
     }
     return true;
@@ -222,7 +222,7 @@ function dmarc_add(mysqli $db, SimpleXMLElement $rpt): bool {
     $trs_res = $db->begin_transaction();
     if ($trs_res === false) {
         $errors = $db->error;
-        print('Failed to begin transaction: ' . $errors);
+        print('Failed to begin transaction: ' . $errors . "\n");
         return false;
     }
     
@@ -257,12 +257,12 @@ function dmarc_add(mysqli $db, SimpleXMLElement $rpt): bool {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to find dmarc_report: ' . $errors);
+            print('Failed to find dmarc_report: ' . $errors . "\n");
             $db->rollback();
             return false;
         }
         if ($res->num_rows > 0) {
-            print('Already exists.');
+            print('Already exists.' . "\n");
             $db->rollback();
             return false;
         }
@@ -274,7 +274,7 @@ function dmarc_add(mysqli $db, SimpleXMLElement $rpt): bool {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert dmarc_report: ' . $errors);
+            print('Failed to insert dmarc_report: ' . $errors . "\n");
         }
         $report_id = $res->fetch_column(0);
         

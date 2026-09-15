@@ -12,7 +12,7 @@ function tls_rpt_org_add(mysqli $db, $rpt): false|int
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find org info: ' . $errors);
+        print('Failed to find org info: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -22,7 +22,7 @@ function tls_rpt_org_add(mysqli $db, $rpt): false|int
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert org info: ' . $errors);
+            print('Failed to insert org info: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -38,7 +38,7 @@ function general_domain_add(mysqli $db, string $domain): false|int {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find domain: ' . $errors);
+        print('Failed to find domain: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -48,7 +48,7 @@ function general_domain_add(mysqli $db, string $domain): false|int {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert domain: ' . $errors);
+            print('Failed to insert domain: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -64,7 +64,7 @@ function tls_rpt_mx_host_pattern_add(mysqli $db, $mx_host): int|false {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find mx host pattern: ' . $errors);
+        print('Failed to find mx host pattern: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -74,7 +74,7 @@ function tls_rpt_mx_host_pattern_add(mysqli $db, $mx_host): int|false {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert mx host pattern: ' . $errors);
+            print('Failed to insert mx host pattern: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -94,7 +94,7 @@ function tls_rpt_mx_host_pattern_and_and_assign(mysqli $db, $policy_id, $mx_host
     $res = $stmt->execute();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to insert mx host pattern assign: ' . $errors);
+        print('Failed to insert mx host pattern assign: ' . $errors . "\n");
         return false;
     }
     return true;
@@ -111,7 +111,7 @@ function general_ip_add(mysqli $db, $ip): int|false {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find ip: ' . $errors);
+        print('Failed to find ip: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -143,7 +143,7 @@ function general_helo_add(mysqli $db, $helo) {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find helo: ' . $errors);
+        print('Failed to find helo: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -153,7 +153,7 @@ function general_helo_add(mysqli $db, $helo) {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert helo: ' . $errors);
+            print('Failed to insert helo: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -169,7 +169,7 @@ function tls_rpt_additional_information_add(mysqli $db, $additional_information)
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find additional information: ' . $errors);
+        print('Failed to find additional information: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -179,7 +179,7 @@ function tls_rpt_additional_information_add(mysqli $db, $additional_information)
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert additional information: ' . $errors);
+            print('Failed to insert additional information: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -195,7 +195,7 @@ function tls_rpt_failure_reason_code_add(mysqli $db, $failure_reason_code) {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to find failure reason code: ' . $errors);
+        print('Failed to find failure reason code: ' . $errors . "\n");
         return false;
     }
     if ($res->num_rows === 0) {
@@ -205,7 +205,7 @@ function tls_rpt_failure_reason_code_add(mysqli $db, $failure_reason_code) {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert failure reason code: ' . $errors);
+            print('Failed to insert failure reason code: ' . $errors . "\n");
             return false;
         }
         return $res->fetch_column(0);
@@ -298,7 +298,7 @@ function tls_rpt_failed_detail_add(mysqli $db, $policy_id, $failed_detail): bool
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to insert tls_rpt_policy_failure_details: ' . $errors);
+        print('Failed to insert tls_rpt_policy_failure_details: ' . $errors . "\n");
         return false;
     }
     return true;
@@ -324,7 +324,7 @@ function tls_rpt_policy_add(mysqli $db, $rpt_id, $policy): bool {
     $res = $stmt->get_result();
     if ($res === false) {
         $errors = $stmt->error;
-        print('Failed to insert tls_rpt_policy: ' . $errors);
+        print('Failed to insert tls_rpt_policy: ' . $errors . "\n");
         return false;
     }
     $policy_id = $res->fetch_column(0);
@@ -361,7 +361,7 @@ function tls_rpt_add(mysqli $db, $rpt): bool {
     date_default_timezone_set('UTC');
     if ($trs_res === false) {
         $errors = $db->error;
-        print('Failed to begin transaction: ' . $errors);
+        print('Failed to begin transaction: ' . $errors . "\n");
         return false;
     }
 
@@ -382,13 +382,13 @@ function tls_rpt_add(mysqli $db, $rpt): bool {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to find tls_rpt: ' . $errors);
+            print('Failed to find tls_rpt: ' . $errors . "\n");
             $db->rollback();
             return false;
         }
         if ($res->num_rows > 0) {
             $db->rollback();
-            print('Already added.');
+            print('Already added.' . "\n");
             return true;
         }
         
@@ -405,7 +405,7 @@ function tls_rpt_add(mysqli $db, $rpt): bool {
         $res = $stmt->get_result();
         if ($res === false) {
             $errors = $stmt->error;
-            print('Failed to insert tls_rpt: ' . $errors);
+            print('Failed to insert tls_rpt: ' . $errors . "\n");
             $db->rollback();
             return false;
         }

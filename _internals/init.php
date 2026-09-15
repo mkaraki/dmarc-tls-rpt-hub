@@ -58,7 +58,7 @@ function get_mbox_file_with_ext($ext, $parts, $mbox, $msgno, $parentsection = ""
             if ($data === false) {
                 $errors = imap_last_error();
                 $errors = $errors === false ? 'NO ERROR' : $errors;
-                print('Failed to fetch body for message ' . $msgno . ' section ' . $section . ': ' . $errors);
+                print('Failed to fetch body for message ' . $msgno . ' section ' . $section . ': ' . $errors . "\n");
                 return false;
             }
             return [$file_name_lower, $data];
