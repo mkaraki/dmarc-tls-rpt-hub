@@ -74,9 +74,9 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                         <?php endif; ?>
 
                                         <?php if ($res['total_failed'] > 0) : ?>
-                                            <span class="badge text-bg-success">Success: <?= htmlentities($res['total_failed']) ?></span>
+                                            <span class="badge text-bg-danger">Failed: <?= htmlentities($res['total_failed']) ?></span>
                                         <?php else : ?>
-                                            <span class="badge text-bg-danger">Success: <?= htmlentities($res['total_failed']) ?></span>
+                                            <span class="badge text-bg-secondary">Failed: <?= htmlentities($res['total_failed']) ?></span>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </a>
