@@ -54,7 +54,7 @@ try {
         if ($mail === false) {
             $errors = imap_last_error();
             $errors = $errors === false ? 'NO ERROR' : $errors;
-            print('Failed to fetch message ' . $i+1 . ': ' . $errors);
+            print('Failed to fetch message ' . $i+1 . ': ' . $errors . "\n");
             continue;
         }
         
@@ -74,7 +74,7 @@ try {
         if (str_ends_with($rpt[0], '.xml.gz')) {
             $rpt[1] =  gzdecode(base64_decode($rpt[1]));
             if ($rpt[1] === false) {
-                print('Failed to decompress');
+                print('Failed to decompress' . "\n");
                 continue;
             }
         } else if (str_ends_with($rpt[0], '.zip')) {
@@ -86,7 +86,7 @@ try {
                 $zip = new ZipArchive();
                 $res = $zip->open($temp_file, ZipArchive::RDONLY);
                 if ($res !== true) {
-                    print('Failed to open zip: ' . $temp_file);
+                    print('Failed to open zip: ' . $temp_file . "\n");
                     continue;
                 }
                 $first_item_name = $zip->getNameIndex(0);
@@ -106,7 +106,7 @@ try {
         
         $res = dmarc_add($db, $rpt);
         if ($res === false) {
-            print('Failed to add dmarc report');
+            print('Failed to add dmarc report' . "\n");
             continue;
         }
         

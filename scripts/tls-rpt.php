@@ -56,7 +56,7 @@ try {
         if ($mail === false) {
             $errors = imap_last_error();
             $errors = $errors === false ? 'NO ERROR' : $errors;
-            print('Failed to fetch message ' . $i+1 . ': ' . $errors);
+            print('Failed to fetch message ' . $i+1 . ': ' . $errors . "\n");
             continue;
         }
 
@@ -74,7 +74,7 @@ try {
         if (str_ends_with($rpt[0], '.json.gz')) {
             $rpt[1] = gzdecode(base64_decode($rpt[1]));
             if ($rpt[1] === false) {
-                print('Failed to decompress attachment in message ' . $i+1);
+                print('Failed to decompress attachment in message ' . $i+1 . "\n");
                 continue;
             }
         }
@@ -83,7 +83,7 @@ try {
         
         $res = tls_rpt_add($db, $rpt);
         if ($res === false) {
-            print('Failed to add tls rpt');
+            print('Failed to add tls rpt' . "\n");
             continue;
         }
         
