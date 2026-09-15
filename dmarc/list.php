@@ -154,11 +154,11 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                     <?php switch ($spf_info['spf_result']) :
                                         case 'pass': ?>
                                         <span class="badge text-bg-success">SPF: Pass</span>
-                                    <?php case 'fail': ?>
+                                    <?php break; case 'fail': ?>
                                         <span class="badge text-bg-danger">SPF: Fail</span>
-                                    <?php default: ?>
+                                    <?php break; default: ?>
                                         <span class="badge text-bg-warning"><?= htmlentities($spf_info['spf_result']) ?></span>
-                                    <?php endswitch; ?>
+                                    <?php break; endswitch; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -180,11 +180,11 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                     <?php switch ($dkim_info['dkim_result']) :
                                         case 'pass': ?>
                                         <span class="badge text-bg-success">DKIM: Pass</span>
-                                    <?php case 'fail': ?>
+                                    <?php break; case 'fail': ?>
                                         <span class="badge text-bg-danger">DKIM: Fail</span>
-                                    <?php default: ?>
+                                    <?php break; default: ?>
                                         <span class="badge text-bg-warning"><?= htmlentities($dkim_info['dkim_result']) ?></span>
-                                    <?php endswitch; ?>
+                                    <?php break; endswitch; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
