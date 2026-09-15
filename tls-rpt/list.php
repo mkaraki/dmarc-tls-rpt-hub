@@ -64,7 +64,7 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                             ?>
                             <td>
                                 <a href="show.php?id=<?= htmlentities($r['id']) ?>">
-                                    <?php if ($res === false) : ?>
+                                    <?php if ($res === null || $res === false) : ?>
                                         Unknown
                                     <?php else : ?>
                                         <?php if ($res['total_successful'] > 0) : ?>
