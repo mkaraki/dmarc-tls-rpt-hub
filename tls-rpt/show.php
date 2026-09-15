@@ -93,12 +93,14 @@ $res_policy = $res_policy->fetch_all(MYSQLI_ASSOC);
                             </th>
                             <td><?= htmlentities($policy['summary_total_successful_sessions']) ?></td>
                             <td>
-                                <a class="btn btn-primary btn-sm position-relative" href="fail.php?id=<?= htmlentities($policy['id']) ?>" role="button">
+                                <a class="btn btn-primary btn-sm position-relative <?= ($policy['summary_total_failed_sessions'] > 0) ? '' : 'disabled' ?>" href="fail.php?id=<?= htmlentities($policy['id']) ?>" role="button">
                                     Check Fail
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        <?= htmlentities($policy['summary_total_failed_sessions']) ?>
-                                        <span class="visually-hidden">fail sessions</span>
-                                    </span>
+                                    <?php if ($policy['summary_total_failed_sessions'] > 0) : ?>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            <?= htmlentities($policy['summary_total_failed_sessions']) ?>
+                                            <span class="visually-hidden">fail sessions</span>
+                                        </span>
+                                    <?php endif; ?>
                                 </a>
                             </td>
 
