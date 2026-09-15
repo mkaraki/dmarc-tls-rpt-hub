@@ -150,8 +150,14 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                             <tr>
                                 <td></td>
                                 <th scope="row"><?= htmlentities($spf_info['domain_name']) ?></th>
-                                <td colspan="5" class="spf-dkim-res-<?= htmlentities($spf_info['spf_result']) ?>">
-                                    SPF: <?= htmlentities($spf_info['spf_result']) ?>
+                                <td colspan="5">
+                                    <?php if ($spf_info['spf_result'] === 'fail') : ?>
+                                        <span class="badge text-bg-danger">SPF: Fail</span>
+                                    <?php else if ($spf_info['spf_result'] === 'pass') : ?>
+                                        <span class="badge text-bg-success">SPF: Pass</span>
+                                    <?php else : ?>
+                                        <span class="badge text-bg-warning"><?= htmlentities($spf_info['spf_result']) ?></span>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -170,7 +176,13 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                 <td></td>
                                 <th scope="row"><?= htmlentities($dkim_info['domain_name']) ?></th>
                                 <td colspan="5" class="spf-dkim-res-<?= htmlentities($dkim_info['dkim_result']) ?>">
-                                    DKIM: <?= htmlentities($dkim_info['dkim_result']) ?>
+                                    <?php if ($dkim_info['dkim_result'] === 'fail') : ?>
+                                        <span class="badge text-bg-danger">DKIM: Fail</span>
+                                    <?php else if ($dkim_info['dkim_result'] === 'pass') : ?>
+                                        <span class="badge text-bg-success">DKIM: Pass</span>
+                                    <?php else : ?>
+                                        <span class="badge text-bg-warning"><?= htmlentities($dkim_info['dkim_result']) ?></span>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
