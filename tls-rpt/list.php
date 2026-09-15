@@ -61,6 +61,9 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                             $stmt->bind_param('i', $r['id']);
                             $stmt->execute();
                             $res = $stmt->get_result();
+                            if ($res !== null && $res !== false) {
+                                $res = $res->fetch_assoc();
+                            }
                             ?>
                             <td>
                                 <a href="show.php?id=<?= htmlentities($r['id']) ?>">
