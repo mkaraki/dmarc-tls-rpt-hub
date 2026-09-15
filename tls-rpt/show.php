@@ -91,12 +91,16 @@ $res_policy = $res_policy->fetch_all(MYSQLI_ASSOC);
                                     MX Patterns
                                 </button>
                             </th>
-                            <th><?= htmlentities($policy['summary_total_successful_sessions']) ?></th>
-                            <th>
-                                <a href="fail.php?id=<?= htmlentities($policy['id']) ?>">
-                                    <?= htmlentities($policy['summary_total_failed_sessions']) ?>
+                            <td><?= htmlentities($policy['summary_total_successful_sessions']) ?></td>
+                            <td>
+                                <a class="btn btn-primary btn-sm position-relative" href="fail.php?id=<?= htmlentities($policy['id']) ?>" role="button">
+                                    Check Fail
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        <?= htmlentities($policy['summary_total_failed_sessions']) ?>
+                                        <span class="visually-hidden">fail sessions</span>
+                                    </span>
                                 </a>
-                            </th>
+                            </td>
 
                             <div class="modal fade" id="mx_modal_<?= $policy['id'] ?>" tabindex="-1" aria-hidden="true">
                                 <div class="modal-dialog">

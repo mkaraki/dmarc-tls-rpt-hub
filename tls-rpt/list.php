@@ -53,26 +53,34 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                     <?= htmlentities($r['id']) ?>
                                 </a>
                             </th>
-                            <th><?= htmlentities($r['organization_name']) ?></th>
-                            <th><?= htmlentities($r['date_range_start']) ?></th>
-                            <th><?= htmlentities($r['date_range_end']) ?></th>
+                            <td><?= htmlentities($r['organization_name']) ?></td>
+                            <td><?= htmlentities($r['date_range_start']) ?></td>
+                            <td><?= htmlentities($r['date_range_end']) ?></td>
                             <?php
                             $stmt = $db->prepare('SELECT SUM(summary_total_successful_sessions) AS total_successful, SUM(summary_total_failed_sessions) AS total_failed FROM tls_rpt_policy WHERE tls_rpt_id = ?');
                             $stmt->bind_param('i', $r['id']);
                             $stmt->execute();
                             $res = $stmt->get_result();
-                            if ($res === false) {
-                                $res = 'Unknown: ERR';
-                            } else {
-                                $res = $res->fetch_assoc();
-                                $res = 'Success: ' . $res['total_successful'] . ', Failure: ' . $res['total_failed'];
-                            }
                             ?>
-                            <th>
+                            <td>
                                 <a href="show.php?id=<?= htmlentities($r['id']) ?>">
-                                    <?= htmlentities($res) ?>
+                                    <?php if ($res === false) : ?>
+                                        Unknown
+                                    <?php else : ?>
+                                        <?php if ($res['total_successful'] > 0) : ?>
+                                            <span class="badge text-bg-success">Success: <?= htmlentities($res['total_successful']) ?></span>
+                                        <?php else : ?>
+                                            <span class="badge text-bg-secondary">Success: <?= htmlentities($res['total_successful']) ?></span>
+                                        <?php endif; ?>
+
+                                        <?php if ($res['total_failed'] > 0) : ?>
+                                            <span class="badge text-bg-success">Success: <?= htmlentities($res['total_failed']) ?></span>
+                                        <?php else : ?>
+                                            <span class="badge text-bg-danger">Success: <?= htmlentities($res['total_failed']) ?></span>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </a>
-                            </th>
+                            </td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

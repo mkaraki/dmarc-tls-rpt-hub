@@ -26,7 +26,7 @@ SELECT
     p.summary_total_successful_sessions, p.summary_total_failed_sessions,
     r.date_range_start, r.date_range_end,
     r.id AS report_id, o.organization_name
-FROM 
+FROM
     tls_rpt_policy p
     JOIN general_domain d ON p.policy_domain_id = d.id
     JOIN tls_rpt r ON p.tls_rpt_id = r.id
@@ -108,8 +108,12 @@ $res_policy = $res_policy->fetch_all(MYSQLI_ASSOC);
                         </td>
                         <td><?= htmlentities($policy['summary_total_successful_sessions']) ?></td>
                         <td>
-                            <a href="fail.php?id=<?= htmlentities($policy['id']) ?>">
-                                <?= htmlentities($policy['summary_total_failed_sessions']) ?>
+                            <a class="btn btn-primary btn-sm position-relative" href="fail.php?id=<?= htmlentities($policy['id']) ?>" role="button">
+                                Check Fail
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <?= htmlentities($policy['summary_total_failed_sessions']) ?>
+                                    <span class="visually-hidden">fail sessions</span>
+                                </span>
                             </a>
                         </td>
 
