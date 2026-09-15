@@ -40,7 +40,7 @@ FROM
 WHERE
     spf_result != "pass"
     ' . ($domain_mode ? 'AND (rc.identifiers_envelope_to_id = ? OR rc.identifiers_header_from_id = ? OR rs.domain_id = ?)' : '') .  '
-    
+
 UNION ALL
 
 SELECT
@@ -62,8 +62,8 @@ FROM
 WHERE
     dkim_result != "pass"
     ' . ($domain_mode ? 'AND (rc.identifiers_envelope_to_id = ? OR rc.identifiers_header_from_id = ? OR rs.domain_id = ?)' : '') .  '
-    
-    
+
+
 ORDER BY
     date_range_end DESC
 LIMIT 100
@@ -135,7 +135,16 @@ $res_policy = $res_policy->fetch_all(MYSQLI_ASSOC);
                         <td>
                             <?= htmlentities($policy['date_range_begin']) ?> - <?= htmlentities($policy['date_range_end']) ?>
                         </td>
-                        <td><?= htmlentities($policy['auth_type']) ?>: <?= htmlentities($policy['result']) ?></td>
+                        <td>
+                            <?php switch ($policy['result']) :
+                                case 'pass': ?>
+                                <span class="badge text-bg-success"><?= htmlentities($policy['auth_type']) ?>: <?= htmlentities($policy['result']) ?></span>
+                            <?php break; case 'fail': ?>
+                                <span class="badge text-bg-danger"><?= htmlentities($policy['auth_type']) ?>: <?= htmlentities($policy['result']) ?></span>
+                            <?php break; default: ?>
+                                <span class="badge text-bg-warning"><?= htmlentities($policy['auth_type']) ?>: <?= htmlentities($policy['result']) ?></span>
+                            <?php break; endswitch; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

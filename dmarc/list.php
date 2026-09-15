@@ -157,7 +157,7 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                     <?php break; case 'fail': ?>
                                         <span class="badge text-bg-danger">SPF: Fail</span>
                                     <?php break; default: ?>
-                                        <span class="badge text-bg-warning"><?= htmlentities($spf_info['spf_result']) ?></span>
+                                        <span class="badge text-bg-warning">SPF: <?= htmlentities($spf_info['spf_result']) ?></span>
                                     <?php break; endswitch; ?>
                                 </td>
                             </tr>
@@ -183,7 +183,7 @@ $res = $res->fetch_all(MYSQLI_ASSOC);
                                     <?php break; case 'fail': ?>
                                         <span class="badge text-bg-danger">DKIM: Fail</span>
                                     <?php break; default: ?>
-                                        <span class="badge text-bg-warning"><?= htmlentities($dkim_info['dkim_result']) ?></span>
+                                        <span class="badge text-bg-warning">DKIM: <?= htmlentities($dkim_info['dkim_result']) ?></span>
                                     <?php break; endswitch; ?>
                                 </td>
                             </tr>
